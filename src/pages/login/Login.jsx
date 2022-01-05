@@ -1,49 +1,42 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { mobile } from '../responsive';
-import Announcement from '../components/Announcement';
-import Navbar from '../components/Navbar';
-import { login } from '../redux/services/api';
+import { login } from '../../redux/services/api';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+
 
 const Container = styled.div`
-    height: calc(100vh - 88px);
+    height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(
+    background: #f5fffa;
+    /* background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
     url("https://s3-pixelphant-frontend.s3.amazonaws.com/frontend/Models-for-your-Product-Photography-best.jpg")
-      center;
+      center; */
   background-size: cover;
 `
 const Wrapper = styled.div`
     width: 30%;
-    ${mobile({ width: '82%' })};
     `
-
 const Form = styled.form`
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    ${mobile({ width: '100%' })}
 `
-
 const Title = styled.h2`
     font-size: 22px;
     font-weight: 500;
 `
-
 const Input = styled.input`
     flex: 1;
     margin: 20px 0px 0px;
     padding: 8px;
 `
-
-
 const Button = styled.button`
     margin-top: 20px;
     padding: 10px;
@@ -65,12 +58,10 @@ const Button = styled.button`
         border: 2px solid teal;
     }
 `
-
 const LinkContainer = styled.div`
     text-align: right;
     margin-top: 8px;
 `
-
 const Link = styled.a`
   margin: 0px 5px;
   font-size: 12px;
@@ -78,7 +69,6 @@ const Link = styled.a`
   cursor: pointer;
   width: 50%;
 `;
-
 const ErrorMsg = styled.div`
   color: red;
   margin-top: 13px;
@@ -86,8 +76,15 @@ const ErrorMsg = styled.div`
 `
 
 const Login = () => {
+  console.log("LOGIN in");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
+  const history = useHistory();
+  if (admin) {
+    console.log("ADMIN true");
+    history.push('/');
+  }
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.userSlice);
   const handleClick = (e) => {
@@ -96,12 +93,10 @@ const Login = () => {
   }
   return (
     <>
-      <Announcement />
-      <Navbar />
       <Container>
         <Wrapper>
           <Title>Login to your account</Title>
-          {error && <ErrorMsg>Something went Wrong!!</ErrorMsg>}
+          {/* {error && <ErrorMsg>Something went Wrong!!</ErrorMsg>} */}
           <Form>
             <Input placeholder='Email' onChange={(e) => setUsername(e.target.value)} />
             <Input placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)} />
