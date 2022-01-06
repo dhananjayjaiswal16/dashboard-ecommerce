@@ -11,7 +11,6 @@ export default function WidgetSm() {
       try {
         const res = await userRequest("user?new=true");
         setUsers(res.data);
-        console.log(res.data, 'users in widget');
       } catch (err) {
         console.log("ERROR while fetching users with msg: ", err.msg);
       }
