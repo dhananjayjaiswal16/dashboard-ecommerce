@@ -4,6 +4,22 @@ export default function WidgetLg() {
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await userRequest("orders");
+        setOrders(res.data);
+        console.log(res.data, 'users in widget');
+      } catch (err) {
+        console.log("ERROR while fetching users with msg: ", err.msg);
+      }
+    }
+    getOrders();
+  }, [])
+
   return (
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
