@@ -79,11 +79,14 @@ const Login = () => {
   console.log("LOGIN in");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
-  const history = useHistory();
-  if (admin) {
-    console.log("ADMIN true");
-    history.push('/');
+  if (localStorage.getItem("persist:root")) {
+    const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
+    const history = useHistory();
+    if (admin) {
+      console.log("ADMIN true");
+      window.location.reload();
+      history.push('/');
+    }
   }
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.userSlice);
