@@ -1,4 +1,5 @@
 import { loginStart, loginFailure, loginSuccess } from '../userSlice';
+import { getProductFailure, getProductStart, getProductSuccess } from '../productSlice';
 import { publicRequest } from '../../requestMethod';
 
 export const login = async (dispatch, user) => {
@@ -8,5 +9,15 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data));
   } catch (err) {
     dispatch(loginFailure());
+  }
+}
+
+export const getProducts = async (dispatch) => {
+  dispatch(getProductStart());
+  try {
+    const res = await publicRequest.post('/product');
+    dispatch(getProductSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductFailure(err));
   }
 }

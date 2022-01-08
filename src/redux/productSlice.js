@@ -5,7 +5,7 @@ const productSlice = createSlice({
   initialState: {
     products: [],
     isFetching: false,
-    error: false,
+    error: '',
   },
   reducers: {
     getProductStart: (state) => {
@@ -15,9 +15,9 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.products = action.payload;
     },
-    getProductFailure: (state) => {
+    getProductFailure: (state, action) => {
       state.isFetching = false;
-      state.error = true;
+      state.error = action.payload;
     }
   },
 });
