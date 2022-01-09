@@ -18,7 +18,21 @@ const productSlice = createSlice({
     getProductFailure: (state, action) => {
       state.isFetching = false;
       state.error = action.payload;
-    }
+    },
+    deleteProductStart: (state) => {
+      state.isFetching = true;
+    },
+    deleteProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products.splice(
+        state.products.findIndex((item) => item._id == action.payload),
+        1
+      )
+    },
+    deleteProductFailure: (state, action) => {
+      state.isFetching = false;
+      state.error = action.payload;
+    },
   },
 });
 
