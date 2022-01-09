@@ -36,5 +36,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { getProductStart, getProductSuccess, getProductFailure } = productSlice.actions;
+export const { getProductStart, getProductSuccess, getProductFailure, deleteProductStart, deleteProductFailure, deleteProductSuccess } = productSlice.actions;
 export default productSlice.reducer;
