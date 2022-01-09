@@ -4,13 +4,13 @@ import { DeleteOutline } from "@material-ui/icons";
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getProducts } from '../../redux/services/api';
+import { deleteProduct, getProducts } from '../../redux/services/api';
 
 export default function ProductList() {
   const products = useSelector((state) => state?.productSlice?.products);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    deleteProduct(id, dispatch);
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function ProductList() {
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
