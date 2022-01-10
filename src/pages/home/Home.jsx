@@ -9,13 +9,16 @@ import { userRequest } from "../../requestMethod";
 
 export default function Home() {
   const [userStats, setUserStats] = useState([]);
-  const MONTHS = useMemo(() => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]);
+  const MONTHS = useMemo(() => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"], []);
 
   useEffect(() => {
     const getStats = async () => {
       try {
         const res = await userRequest.get('user/stats');
-        res.data.map((value) =>
+        const list = res.data.sort((a, b) => {
+          return (a._id - b._id)
+        });
+        list.map((value) =>
           setUserStats((prev) => [
             ...prev,
             { name: MONTHS[value._id - 1], "Active User": value.total }
