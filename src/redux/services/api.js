@@ -1,5 +1,5 @@
 import { loginStart, loginFailure, loginSuccess } from '../userSlice';
-import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductFailure, deleteProductSuccess, getSingleProductFailure, getSingleProductStart, getSingleProductSuccess } from '../productSlice';
+import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductFailure, deleteProductSuccess } from '../productSlice';
 import { publicRequest, userRequest } from '../../requestMethod';
 
 export const login = async (dispatch, user) => {
@@ -32,12 +32,12 @@ export const deleteProduct = async (id, dispatch) => {
   }
 }
 
-export const getSingleProduct = async (id, dispatch) => {
-  dispatch(getSingleProductStart());
-  try {
-    const res = await userRequest.get(`/product/${id}`);
-    dispatch(getSingleProductSuccess(res.data));
-  } catch (err) {
-    dispatch(getSingleProductFailure(err));
-  }
-}
+// export const getSingleProduct = async (id, dispatch) => {
+//   dispatch(getSingleProductStart());
+//   try {
+//     const res = await userRequest.get(`/product/${id}`);
+//     dispatch(getSingleProductSuccess(res.data));
+//   } catch (err) {
+//     dispatch(getSingleProductFailure(err));
+//   }
+// }
