@@ -21,7 +21,7 @@ export default function Home() {
             { name: MONTHS[value._id - 1], "Active User": value.total }
           ])
         )
-      } catch (error) {
+      } catch (err) {
         console.log("ERROR while fetching user stats with err msg", err.msg);
       }
     }
