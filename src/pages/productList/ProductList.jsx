@@ -10,6 +10,7 @@ export default function ProductList() {
   const products = useSelector((state) => state?.productSlice?.products);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
+    console.log("row._id", id);
     deleteProduct(id, dispatch);
   };
 
@@ -45,12 +46,12 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/product/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
+              onClick={() => handleDelete(params.row?._id)}
             />
           </>
         );
