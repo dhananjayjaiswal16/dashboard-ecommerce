@@ -2,10 +2,14 @@ import React from "react";
 import "./topbar.css";
 import { ArrowRight } from "@material-ui/icons";
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { logout } from '../../redux/userSlice';
 export default function Topbar() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const logoutHandler = () => {
     localStorage.clear();
+    dispatch(logout());
     history.push('/login');
   }
 
