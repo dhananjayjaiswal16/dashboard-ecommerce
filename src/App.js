@@ -2,7 +2,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -14,6 +14,7 @@ import Login from "./pages/login/Login";
 function App() {
   let admin = false;
   if (localStorage.getItem("persist:root")) {
+    console.log("if true");
     admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
   }
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        {admin &&
+        {admin ?
           <>
             <Topbar />
             <div className="container">
@@ -49,7 +50,7 @@ function App() {
                 <NewProduct />
               </Route>
             </div>
-          </>
+          </> : <Redirect to='/login' />
         }
       </Switch>
     </Router>
