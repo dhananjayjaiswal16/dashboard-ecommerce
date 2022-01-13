@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./newProduct.css";
-import { addProduct } from '../../redux/services/api';
-import { useDispatch } from 'react-redux';
 import { imgUploadToFirebase } from "./firebaseHelper";
+import { useDispatch } from 'react-redux';
 
 export default function NewProduct() {
   const [inputs, setInputs] = useState({});
@@ -22,8 +21,7 @@ export default function NewProduct() {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const product = imgUploadToFirebase(imgFile);
-    addProduct(product, dispatch);
+    imgUploadToFirebase(imgFile, inputs, category, dispatch);
   }
   return (
     <div className="newProduct">

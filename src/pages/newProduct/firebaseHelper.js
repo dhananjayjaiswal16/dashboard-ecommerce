@@ -1,7 +1,10 @@
 import app from '../../firebase';
 import { ref, getStorage, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
-export const imgUploadToFirebase = (imgFile) => {
+import { addProduct } from '../../redux/services/api';
+
+export const imgUploadToFirebase = (imgFile, inputs, category, dispatch) => {
+
   const fileName = new Date().getTime() + imgFile.name;
   const storage = getStorage(app);
   const storageRef = ref(storage, fileName);
@@ -29,7 +32,7 @@ export const imgUploadToFirebase = (imgFile) => {
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         const product = { ...inputs, img: downloadURL, categories: category };
-        return product;
+        addProduct(product, dispatch);
       });
     }
   );
