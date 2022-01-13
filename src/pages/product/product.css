@@ -76,12 +76,13 @@
 
 .productForm {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .productFormLeft {
   display: flex;
   flex-direction: column;
+  width: 30%;
 }
 
 .productFormLeft > label {
@@ -127,4 +128,5 @@
   color:white;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
 }
