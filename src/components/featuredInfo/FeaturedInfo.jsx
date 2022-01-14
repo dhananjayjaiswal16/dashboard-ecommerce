@@ -22,7 +22,7 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Revenue</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">$ {income.length > 0 ? income[1]?.total : 0}</span>
+          <span className="featuredMoney">₹ {income.length > 0 ? income[1]?.total : 0}</span>
           <span className="featuredMoneyRate">
             11.4 <ArrowUpward className="featuredIcon negative" />
           </span>
