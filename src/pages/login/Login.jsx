@@ -77,7 +77,7 @@ const ErrorMsg = styled.div`
 
 const Login = () => {
   console.log("LOGIN in");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   if (localStorage.getItem("persist:root")) {
     const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
@@ -87,7 +87,7 @@ const Login = () => {
   const { isFetching, error } = useSelector((state) => state.userSlice);
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    login(dispatch, { email, password });
   }
   return (
     <>
@@ -96,7 +96,7 @@ const Login = () => {
           <Title>Login to your account</Title>
           {/* {error && <ErrorMsg>Something went Wrong!!</ErrorMsg>} */}
           <Form>
-            <Input placeholder='Email' onChange={(e) => setUsername(e.target.value)} />
+            <Input placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
             <Input placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)} />
 
             <Button disabled={isFetching} onClick={handleClick}>Login</Button>
