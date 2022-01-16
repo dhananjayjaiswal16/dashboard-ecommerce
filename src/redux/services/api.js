@@ -1,5 +1,6 @@
 import { loginStart, loginFailure, loginSuccess } from '../userSlice';
 import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductFailure, deleteProductSuccess, updateProductFailure, updateProductStart, updateProductSuccess, addProductFailure, addProductStart, addProductSuccess } from '../productSlice';
+import { getOrderStart, getOrderFailure, getOrderSuccess, deleteOrderFailure, deleteOrderStart, deleteOrderSuccess } from '../orderSlice'
 import { publicRequest, userRequest } from '../../requestMethod';
 
 export const login = async (dispatch, user) => {
@@ -52,5 +53,17 @@ export const addProduct = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure(err));
+  }
+}
+
+
+export const getOrders = async (dispatch) => {
+  dispatch(getOrderStart());
+  try {
+    const res = await publicRequest.get('/order');
+    console.log("res.data in Order", res.data);
+    dispatch(getOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(getOrderFailure(err));
   }
 }
