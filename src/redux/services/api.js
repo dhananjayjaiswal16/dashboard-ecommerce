@@ -60,10 +60,9 @@ export const addProduct = async (product, dispatch) => {
 export const getOrders = async (dispatch) => {
   dispatch(getOrderStart());
   try {
-    const res = await publicRequest.get('/order');
-    console.log("res.data in Order", res.data);
+    const res = await userRequest.get('/order');
     dispatch(getOrderSuccess(res.data));
   } catch (err) {
-    dispatch(getOrderFailure(err));
+    dispatch(getOrderFailure(err.message));
   }
 }
