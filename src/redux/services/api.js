@@ -76,3 +76,12 @@ export const deleteOrder = async (id, dispatch) => {
     dispatch(deleteOrderFailure(err.message));
   }
 }
+
+export const getEmailById = async (id) => {
+  try {
+    const res = await userRequest.get(`/user/find/${id}`);
+    return (res.data.email);
+  } catch (err) {
+    console.log("Error while getting user data with err msg:", err.msg);
+  }
+}

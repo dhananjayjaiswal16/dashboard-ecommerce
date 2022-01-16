@@ -6,10 +6,19 @@ import {
   PhoneAndroid,
   Publish,
 } from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import "./user.css";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import "./order.css";
+import { getEmailById } from '../../redux/services/api'
+import { useEffect } from "react";
 
 export default function User() {
+  const location = useLocation();
+  const orderId = location.pathname.split('/')[2];
+  const order = useSelector((state) => (
+    state.orderSlice.orders.find((order) => order?._id == orderId)
+  ))
+
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -21,14 +30,9 @@ export default function User() {
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
-            <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="userShowImg"
-            />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUsername">Order Id:</span>
+              <span className="userShowUserTitle">{order._id}</span>
             </div>
           </div>
           <div className="userShowBottom">

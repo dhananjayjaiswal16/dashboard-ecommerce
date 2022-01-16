@@ -1,4 +1,4 @@
-import "./userList.css";
+import "./orderList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
@@ -24,11 +24,11 @@ export default function UserList() {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row._id}>
+            <Link to={"/order/" + params.row._id}>
               <button className="userListEdit">View Order Detail</button>
             </Link>
             <DeleteOutline
