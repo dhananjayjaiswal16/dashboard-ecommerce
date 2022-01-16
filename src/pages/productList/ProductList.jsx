@@ -10,7 +10,7 @@ export default function ProductList() {
   const products = useSelector((state) => state?.productSlice?.products);
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    console.log("row._id", id);
+    console.log("row._id delete product", id);
     deleteProduct(id, dispatch);
   };
 
