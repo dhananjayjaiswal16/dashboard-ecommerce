@@ -66,3 +66,13 @@ export const getOrders = async (dispatch) => {
     dispatch(getOrderFailure(err.message));
   }
 }
+
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/order/${id}`);
+    dispatch(deleteOrderSuccess(id));
+  } catch (err) {
+    dispatch(deleteOrderFailure(err.message));
+  }
+}
