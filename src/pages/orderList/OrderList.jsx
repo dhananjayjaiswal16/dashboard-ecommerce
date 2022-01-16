@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { deleteOrder, getOrders } from "../../redux/services/api";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function UserList() {
+export default function OrderList() {
   const orders = useSelector((state) => state?.orderSlice?.orders);
   const dispatch = useDispatch();
   useEffect(() => {

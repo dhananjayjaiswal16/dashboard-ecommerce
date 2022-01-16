@@ -10,6 +10,7 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
+import UserList from "./pages/userList/UserList";
 
 function App() {
   let admin = false;
@@ -30,6 +31,9 @@ function App() {
               <Sidebar />
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="/users">
+                <UserList />
               </Route>
               <Route path="/orders">
                 <OrderList />

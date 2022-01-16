@@ -12,7 +12,7 @@ import "./order.css";
 import { getEmailById } from '../../redux/services/api'
 import { useEffect } from "react";
 
-export default function User() {
+export default function Order() {
   const location = useLocation();
   const orderId = location.pathname.split('/')[2];
   const order = useSelector((state) => (
