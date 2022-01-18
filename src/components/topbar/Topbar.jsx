@@ -4,6 +4,7 @@ import { ArrowRight } from "@material-ui/icons";
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { logout } from '../../redux/userSlice';
+import { Link } from 'react-router-dom'
 export default function Topbar() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">DJ.</span>
+          <span className="logo"><Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>DJ.</Link></span>
         </div>
         <div className="topRight" onClick={logoutHandler}>
           <p style={{ cursor: 'pointer' }}>Logout</p>
