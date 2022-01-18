@@ -1,7 +1,7 @@
 import { loginStart, loginFailure, loginSuccess } from '../userSlice';
 import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductFailure, deleteProductSuccess, updateProductFailure, updateProductStart, updateProductSuccess, addProductFailure, addProductStart, addProductSuccess } from '../productSlice';
 import { getOrderStart, getOrderFailure, getOrderSuccess, deleteOrderFailure, deleteOrderStart, deleteOrderSuccess } from '../orderSlice';
-import { getUserFailure, getUserStart, getUserSuccess } from '../allUsersSlice';
+import { getUserFailure, getUserStart, getUserSuccess, deleteUserSuccess, deleteUserFailure, deleteUserStart } from '../allUsersSlice';
 import { publicRequest, userRequest } from '../../requestMethod';
 
 export const login = async (dispatch, user) => {
@@ -85,5 +85,15 @@ export const getUsers = async (dispatch) => {
     dispatch(getUserSuccess(res.data));
   } catch (err) {
     dispatch(getUserFailure(err.message));
+  }
+}
+
+export const deleteUser = async (id, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+    const res = await userRequest.delete(`/user/${id}`);
+    dispatch(deleteUserSuccess(id));
+  } catch (err) {
+    dispatch(deleteUserFailure(err.message));
   }
 }
