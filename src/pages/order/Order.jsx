@@ -5,6 +5,7 @@ import {
   PermIdentity,
   PhoneAndroid,
   Publish,
+  Storefront
 } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -18,14 +19,29 @@ export default function Order() {
   const order = useSelector((state) => (
     state.orderSlice.orders.find((order) => order?._id == orderId)
   ))
-
+  // To get user data from state
+  const userId = order.userId;
+  const user = useSelector((state) => (
+    state.allUsersSlice.users.find((user) => user?._id == userId)
+  ));
+  //to get product data from state
+  let productData = order.products.map((product) => {
+    const prodId = product.productId
+    const singleProduct = useSelector((state) => (
+      state.productSlice.products.find((product1) => product1?._id == prodId)
+    ));
+    const productData = {
+      id: singleProduct._id,
+      title: singleProduct?.title,
+      img: singleProduct?.img,
+      quantity: product.quantity
+    }
+    return productData;
+  })
   return (
     <div className="user">
       <div className="userTitleContainer">
-        <h1 className="userTitle">Edit User</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
+        <h1 className="userTitle">Order Details</h1>
       </div>
       <div className="userContainer">
         <div className="userShow">
@@ -36,27 +52,32 @@ export default function Order() {
             </div>
           </div>
           <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99</span>
-            </div>
+            <span className="userShowTitle">Order Details</span>
+            {
+              productData.map((product) => (
+                <div className="userShowInfo">
+                  <span className="userShowInfoTitle">{product.title}</span>
+                  <img className="userItemImages" src={product.img} alt={`imgOf${product.title}`} />
+                  <span className="userShowInfoTitle"><strong>Quantity: </strong> {product.quantity}</span>
+                </div>
+              ))
+            }
             <div className="userShowInfo">
               <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">10.12.1999</span>
+              <span className="userShowInfoTitle">{order.createdAt.slice(0, 10)}</span>
             </div>
-            <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 123 456 67</span>
-            </div>
+            <span className="userShowTitle">User Details</span>
             <div className="userShowInfo">
               <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">annabeck99@gmail.com</span>
+              <span className="userShowInfoTitle">{user.email}</span>
             </div>
             <div className="userShowInfo">
               <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">New York | USA</span>
+              <span className="userShowInfoTitle">{order.address?.line1}, {order.address?.line2} {order.address?.city}</span>
+            </div>
+            <div className="userShowInfo">
+              <LocationSearching className="userShowIcon" />
+              <span className="userShowInfoTitle"><strong>Pin Code: </strong>{order.address?.postal_code}</span>
             </div>
           </div>
         </div>
