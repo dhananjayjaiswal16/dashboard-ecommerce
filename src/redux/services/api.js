@@ -1,6 +1,7 @@
 import { loginStart, loginFailure, loginSuccess } from '../userSlice';
 import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductFailure, deleteProductSuccess, updateProductFailure, updateProductStart, updateProductSuccess, addProductFailure, addProductStart, addProductSuccess } from '../productSlice';
-import { getOrderStart, getOrderFailure, getOrderSuccess, deleteOrderFailure, deleteOrderStart, deleteOrderSuccess } from '../orderSlice'
+import { getOrderStart, getOrderFailure, getOrderSuccess, deleteOrderFailure, deleteOrderStart, deleteOrderSuccess } from '../orderSlice';
+import { getUserFailure, getUserStart, getUserSuccess } from '../allUsersSlice';
 import { publicRequest, userRequest } from '../../requestMethod';
 
 export const login = async (dispatch, user) => {
@@ -77,11 +78,12 @@ export const deleteOrder = async (id, dispatch) => {
   }
 }
 
-export const getEmailById = async (id) => {
+export const getUsers = async (dispatch) => {
+  dispatch(getUserStart());
   try {
-    const res = await userRequest.get(`/user/find/${id}`);
-    return (res.data.email);
+    const res = await userRequest.get('/user');
+    dispatch(getUserSuccess(res.data));
   } catch (err) {
-    console.log("Error while getting user data with err msg:", err.msg);
+    dispatch(getUserFailure(err.message));
   }
 }
