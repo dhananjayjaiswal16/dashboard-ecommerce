@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { login } from '../../redux/services/api';
 import { useDispatch, useSelector } from 'react-redux';
@@ -76,15 +76,16 @@ const ErrorMsg = styled.div`
 `
 
 const Login = () => {
-  console.log("LOGIN in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  if (localStorage.getItem("persist:root")) {
-    const admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
-    const history = useHistory();
-  }
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.userSlice);
+  const history = useHistory();
+  const { isFetching, error, currentUser } = useSelector((state) => state.userSlice);
+  useEffect(() => {
+    if (currentUser) {
+      history.push("/");
+    }
+  }, [])
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { email, password });
