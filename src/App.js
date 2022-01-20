@@ -11,20 +11,14 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import UserList from "./pages/userList/UserList";
+import { useSelector } from "react-redux";
 
 function App() {
-  let admin = false;
-  if (localStorage.getItem("persist:root")) {
-    console.log("if true");
-    admin = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.user.isAdmin;
-  }
+  const token = useSelector(state => state?.userSlice?.currentUser?.token);
   return (
     <Router>
       <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        {admin ?
+        {token ?
           <>
             <Topbar />
             <div className="container">
@@ -53,8 +47,9 @@ function App() {
               <Route path="/newproduct">
                 <NewProduct />
               </Route>
+              <Redirect to='/' />
             </div>
-          </> : <Redirect to='/login' />
+          </> : <><Route path="/login"><Login /></Route><Redirect to='/login' /></>
         }
       </Switch>
     </Router>
