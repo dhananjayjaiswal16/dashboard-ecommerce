@@ -15,7 +15,7 @@ export default function OrderList() {
   }, []);
 
   const handleDelete = (id) => {
-    console.log("row._id delete order", id);
+    // console.log("row._id delete order", id);
     deleteOrder(id, dispatch);
   };
 

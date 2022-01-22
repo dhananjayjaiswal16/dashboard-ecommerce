@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000/api/";
+// const BASE_URL = "http://localhost:8000/api/";
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 var TOKEN = '';
 if (localStorage.getItem("persist:root")) {

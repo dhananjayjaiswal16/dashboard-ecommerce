@@ -14,7 +14,7 @@ export default function UserList() {
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    console.log("row._id delete product", id);
+    // console.log("row._id delete product", id);
     deleteUser(id, dispatch);
   };
 

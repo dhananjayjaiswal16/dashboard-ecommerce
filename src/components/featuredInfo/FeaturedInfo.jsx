@@ -9,7 +9,7 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("order/income");
-        console.log("res.data in income", res.data);
+        // console.log("res.data in income", res.data);
         setIncome(res.data);
       } catch (err) {
 
