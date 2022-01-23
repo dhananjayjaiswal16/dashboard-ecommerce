@@ -18,5 +18,5 @@ password: password123
 Live at -> https://ecommerce-admin-dj.netlify.app
 ### Tech Stack
 
-Node, Express and MongoDB
+React and Redux
 
