@@ -11,6 +11,13 @@ export default function Home() {
   const [userStats, setUserStats] = useState([]);
   const MONTHS = useMemo(() => ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"], []);
 
+  const token = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.userSlice)?.currentUser?.token;
+  if (token == undefined || token == null) {
+    window.location.reload();
+  }
+  console.log("token in Home ", token);
+
+
   useEffect(() => {
     const getStats = async () => {
       try {
